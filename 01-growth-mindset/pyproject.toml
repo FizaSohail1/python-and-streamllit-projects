@@ -1,0 +1,20 @@
+[project]
+name = "01-growth-mindset"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "FizaSohail1", email = "fizasohail512@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "ruff>=0.9.10",
+    "streamlit>=1.43.2",
+]
+
+[project.scripts]
+01-growth-mindset = "01_growth_mindset:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
