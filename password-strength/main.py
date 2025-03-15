@@ -1,30 +1,39 @@
 import streamlit as st
-import string 
-import random
 
-st.title("Password Generator")
-st.write("Just select your password length and click on generate!")
+st.set_page_config(page_title="Password Strength Meter", page_icon="🔏")
 
-value = st.slider("Select a length",0,100)
+st.title("🔏 Password Strength Meter")
+st.write("Enter your password to check its strength.")
 
-def password_generator(len,isnumbers,isspecialchrac):
-    chracters = string.ascii_letters
+password = st.text_input("Enter Your Password:", type="password")
 
-    if isnumbers:
-        isnumbers = string.digits
-        chracters += isnumbers
-    elif isspecialchrac:
-        specialChrac = string.punctuation
-        chracters += specialChrac
+score = 0
+feedback = []
 
-    return ''.join(random.choice(chracters) for _ in range(len))    
+if password:
+    if len(password) >= 8:
+        score += 1
+    else:
+        feedback.append("Password should be at least 8 characters long.")
 
-length =  value 
-use_digit = st.checkbox("Do you want to add digits?")          
-use_specialchracters = st.checkbox("Do you want to add special chracters?")
+    if any(char.isdigit() for char in password):
+        score += 1
+    else:
+        feedback.append("Add at least one number.")
 
-if st.button("Generate"):
-  result =  password_generator(length,use_digit,use_specialchracters)
-  st.write(result)
+    if any(char.isupper() for char in password):
+        score += 1
+    else:
+        feedback.append("Use at least one uppercase letter.")
 
-    
+    if any(char in "!@#$%^&*()_+-=[]{}|;:'\",.<>?/`~" for char in password):
+        score += 1
+    else:
+        feedback.append("Include at least one special character.")
+
+    st.progress((score + 1) / 5)
+
+    if feedback:
+        st.warning("Suggestions to improve your password:")
+        for suggestion in feedback:
+            st.write(f"- {suggestion}")
