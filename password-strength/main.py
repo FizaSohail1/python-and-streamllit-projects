@@ -37,3 +37,7 @@ if password:
         st.warning("Suggestions to improve your password:")
         for suggestion in feedback:
             st.write(f"- {suggestion}")
+
+st.write("Made By Fiza 💖 ")            
+
+
