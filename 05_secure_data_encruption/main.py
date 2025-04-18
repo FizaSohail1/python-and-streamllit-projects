@@ -9,13 +9,13 @@ KEY = b'W9V5nGtQSe2mRGOY-iRJR7gWxXpTaVuU0ZyNsOF1xao='
 
 def load_data():
     if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as file:
+        with open(DATA_FILE,'r') as file:
             return json.load(file)
     return {}
 
-def save_data(data):
-    with open(DATA_FILE, "w") as file:
-        json.dump(data, file)
+def save_data(data):                
+    with open(DATA_FILE,'w') as file:
+        json.dump(data ,file) # Write Python object to a JSON file
 
 def hash_passkey(passkey):
     return hashlib.sha256(passkey.encode()).hexdigest()
@@ -30,8 +30,30 @@ if "username" not in st.session_state:
 
 st.title("🔐 Simple Secure Note App")
 
-menu = ["Login", "Store Data", "Retrieve Data"]
+menu = ["Home","Sign Up","Login", "Store Data", "Retrieve Data"]
 choice = st.sidebar.selectbox("Navigation", menu)
+
+if choice == "Home":
+    st.subheader("🏠 Welcome to the Secure Data System")
+    st.write("Use this app to **securely store and retrieve data** using unique passkeys.")
+
+if choice == "Sign Up":
+    st.subheader("📝 Create New Account")
+    new_user = st.text_input("New Username")
+    new_passkey = st.text_input("New Passkey", type="password")    
+
+    if new_user and new_passkey:
+        hashed = hash_passkey(new_passkey)
+        if new_user not in stored_data:
+            stored_data[new_user] = []
+        stored_data[new_user].append({
+            " passkey": hashed
+        })
+        save_data(stored_data)
+        st.success("✅ Account created! Now login.")
+    else:
+        st.warning("Please enter both fields.")    
+
 
 if choice == "Login":
     st.subheader("🔑 User Login")
@@ -105,3 +127,9 @@ elif choice == "Retrieve Data":
                 st.warning("Please fill all fields.")
     else:
         st.warning("⚠️ Please login first.")
+
+
+
+
+
+    
