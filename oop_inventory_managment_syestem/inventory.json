@@ -1,0 +1,28 @@
+[
+   {
+      "_name": "Printed lawn shirt",
+      "_price": 1500.0,
+      "_product_id": "001",
+      "_quantity_in_stock": 14,
+      "size": "s",
+      "material": "soft cotton",
+      "__class__": "Clothing"
+   },
+   {
+      "_name": "Iphone 15 pro",
+      "_price": 5460.0,
+      "_product_id": "1",
+      "_quantity_in_stock": 30,
+      "warranty_years": 1,
+      "brand": "HP",
+      "__class__": "Electronics"
+   },
+   {
+      "_name": "Potatoes",
+      "_price": 35.0,
+      "_product_id": "01",
+      "_quantity_in_stock": 15,
+      "expiry_date": "2025-05-14",
+      "__class__": "Grocery"
+   }
+]
